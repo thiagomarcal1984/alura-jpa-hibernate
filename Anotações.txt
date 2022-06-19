@@ -147,7 +147,8 @@ Para obter o ResultList filtrado com essa JPQL, use:
     q.setParameter("meuParm", nome); // Se o parâmetro for nomeado ou...
     q.setParameter(1, nome); // ...se o parâmetro for identificado por número.
     
-    q.getResultList();
+    q.getResultList(); // Para retornar uma lista do tipo Classe.
+    q.getSingleResult(); // Para retornar um único objeto da classe Classe.
 
 Para buscar dados de tabelas relacionadas, basta usar o acesso aos objetos 
 referenciados pela classe consultada:
@@ -156,3 +157,13 @@ referenciados pela classe consultada:
 
 Repare que o filtro é feito na Strign nome no objeto categoria que está dentro
 do objeto p. É uma consulta sem uso de joins do SQL normal!
+
+A JPQL pode retornar outros tipos de dados além daqueles das entidades:
+    String jpql = "SELECT p.preco FROM Produto p WHERE p.nome = :nome";
+    return this.em.createQuery(jpql, BigDecimal.class)
+            .setParameter("nome", nome)
+            .getSingleResult();
+
+Nesta JPQL, o retorno será o mesmo do atributo preco no objeto p. Note que o
+método em.createQuery recebe a string JPQL e o tipo que vai ser retornado
+(neste caso, o tipo será BigDecimal, que não é uma entidade).
