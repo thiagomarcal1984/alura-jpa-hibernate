@@ -96,7 +96,9 @@ Ciclo de vida de uma Entity no Insert:
         gerencia. Quando o método persist() de EntityManager é chamado, ele 
         muda de estado para Managed.
     *   Managed: o EntityManager gerencia a entidade. Enquanto o EntityManager
-        não for fechado, a entidade mantém o estado de Managed.
+        não for fechado, a entidade mantém o estado de Managed. As alterações 
+        nas entidades serão salvas logo que os métodos flush ou commit forem
+        chamados.
     *   Detached: depois que o EntityManager for fechado , ele passa para este 
         estado. O EntityManager não gerencia mais esta entidade.
 
@@ -108,3 +110,10 @@ Métodos do EntityManager:
     *   close(): fecha o EntityManager gerenciado pela aplicação/desenvolvedor.
         Todas as entidades gerenciadas passam para o estado Detached.
     *   clear(): muda o estado das entidades gerenciadas para Detached.
+    *   merge(objeto): muda o estado das entidades Detached para gerenciadas. 
+        Porém, não é o objeto passado no parâmetro que se torna gerenciado, mas
+        sim uma nova instancia da entidade com os mesmos valores da entidade 
+        Detached.
+
+Ao desenvolver entidades, elas precisam todas ter um construtor sem parâmetros.
+Do contrário, o método merge pode falhar porque não tem esse construtor padrão.
