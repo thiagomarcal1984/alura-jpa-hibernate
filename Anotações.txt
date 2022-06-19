@@ -89,3 +89,22 @@ que forem chave estrangeira para as entidades-filhas.
 
 O JPA NUNCA assume qual a cardinalidade que vai existir entre as propriedades
 dos objetos Entity.
+
+
+Ciclo de vida de uma Entity no Insert:
+    *   Transient: nasce do construtor da entidade, mas o EntityManager não 
+        gerencia. Quando o método persist() de EntityManager é chamado, ele 
+        muda de estado para Managed.
+    *   Managed: o EntityManager gerencia a entidade. Enquanto o EntityManager
+        não for fechado, a entidade mantém o estado de Managed.
+    *   Detached: depois que o EntityManager for fechado , ele passa para este 
+        estado. O EntityManager não gerencia mais esta entidade.
+
+Métodos do EntityManager:
+    *   persist(objeto): cria uma instância Gerenciada e Persistente.
+    *   .getTransaction().commit(): confirma as modificações no database.
+    *   flush(): faz com que o estado das entidades seja sincronizado com o 
+        database, mas sem a conclusão da transação (commit).
+    *   close(): fecha o EntityManager gerenciado pela aplicação/desenvolvedor.
+        Todas as entidades gerenciadas passam para o estado Detached.
+    *   clear(): muda o estado das entidades gerenciadas para Detached.
