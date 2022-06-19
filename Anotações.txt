@@ -15,8 +15,16 @@ persistence-unit (javax.persistence.jdbc):
     * user;
     * password.
 
-Algumas propriedades específicas do JPA dentro da tag persistence-unit:
-    * dialect;
+Algumas propriedades específicas do Hibernate dentro da tag persistence-unit:
+    *   dialect
+    *   show_sql
+    *   hbm2ddl (NÃO CONFUNDA COM hbm2DLL, é hbm2dDL. Data Definition Language).
+        Alguns valores:
+            1) create: apaga o database e cria um do zero.
+            2) create-drop: mesmo que create, mas depois apaga o database.
+            3) update: só ACRESCENTA elementos ao database, se necessário.
+            4) validate: só confirma se o database está igual à configuração.
+
 
 Anotações do JPA dentro das classes de modelo:
     * Entity: informa que a classe deve ser gerenciada pela EntityManager.
@@ -36,4 +44,26 @@ da tag persistence-unit).
 
 Cuidado: usando Hibernate, ou você declara todas as classes Entity ou não 
 declara nenhuma. Do contrário, o Hibernate só encontra as classes declaradas
-dentor do persistence.xml.
+dentro do persistence.xml.
+
+Passos para persistir dados usando Hibernate:
+    1)  Crie uma EntityManagerFactory com o método estático 
+        Persistence.createEntityManagerFactory(String persitenceUnit). Esse 
+        método usa como parâmetro o nome de uma das persistence-unit presentes
+        no arquivo persistence.xml.
+
+            EntityManagerFactory factory = Persistence
+                    .createEntityManagerFactory("loja");
+
+    2)  Crie uma EntityManager a partir do objeto EntityManagerFactory:
+        EntityManager em = factory.createManagerFactory();
+
+    3)  Inicie uma transação. Como a persistence-unit usa transações do tipo
+        RESOURCE_LOCAL, é necessário iniciar e fechar as transações.
+
+    4)  Use o método em.persist(objetoDaEntidade).
+
+    5)  Feche a transação (em.getTransaction().commit()).
+
+    6)  Libere os recursos:
+            em.close();
