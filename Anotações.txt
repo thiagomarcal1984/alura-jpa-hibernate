@@ -1,0 +1,6 @@
+Dois problemas do JDBC: produz um código muito verboso e alto acoplamento
+com o banco de dados.
+
+Dependências para o projeto no Maven:
+    org.hibernate hibernate-entitymanager 5.4.27.Final
+    com.h2database h2 1.4.200
