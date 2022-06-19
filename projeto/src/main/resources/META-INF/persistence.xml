@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2"
-	xmlns="http://xmlns.jcp.org/xml/ns/persitence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
 	<!-- 
 		Cada persistence-unit equivale a um banco de dados.
@@ -13,25 +12,29 @@
 				1) JTA: o servidor de aplicação cria o EntityManager;
 				2) RESOURCE_LOCAL: o desenvolvedor cria o EntityManager.
 	-->
-	<persistence-unit name="loja" transaction-type="JTA">
+	<persistence-unit name="loja" transaction-type="RESOURCE_LOCAL">
 		<class>br.com.alura.modelo.Produto</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver">
-				<!-- Classe do Driver JDBC usada na persistence-unit. -->
-			</property>
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja">
-				<!-- 
-					URL usada pelo Driver JDBC. Neste caso, h2 é o protocolo, 
-					mem é host do database (a memória, no caso) e loja é o 
-					banco de dados em si.
-				-->
-			</property>
+			<!-- 
+				TAG PROPERTY NÃO PODE TER ELEMENTOS! Tirei os comentários de 
+				dentro de cada tag property. 
+			-->
+
+			<!-- Classe do Driver JDBC usada na persistence-unit. -->
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<!-- 
+				URL usada pelo Driver JDBC. Neste caso, h2 é o protocolo, 
+				mem é host do database (a memória, no caso) e loja é o 
+				banco de dados em si.
+			-->
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja" />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
 
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect">
-				<!-- Explica pro Hibernate qual a melhor forma de usar o SQL. -->
-			</property>
+			<!-- Explica pro Hibernate qual a melhor forma de usar o SQL. -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>
