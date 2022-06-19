@@ -18,6 +18,7 @@ persistence-unit (javax.persistence.jdbc):
 Algumas propriedades específicas do Hibernate dentro da tag persistence-unit:
     *   dialect
     *   show_sql
+    *   format_sql
     *   hbm2ddl (NÃO CONFUNDA COM hbm2DLL, é hbm2dDL. Data Definition Language).
         Alguns valores:
             1) create: apaga o database e cria um do zero.
@@ -127,3 +128,31 @@ Na Java Persistence Query Language (JPQL), a sintaxe de um select seria:
 
 A ResultList desta JPQL é obtida a partir do método getResultList(), que é
 acessível a partir de uma query gerada pelo EntityManager (em.createQuery(q)).
+
+Ao usar JPQL, não confunda as propriedades dos objetos do banco de dados (nomes
+de tabelas, colunas etc.) com as propriedades das entidades (nomes de classe,
+atributos etc.). A JPQL NÃO usa as propriedades usadas no database, mas sim nas
+entidades. JPQL é uma linguagem orientada a objetos, não ao modelo relacional.
+
+Na JPQL, o fornecimento de parâmetros é parecido com o do JDBC, mas ao invés de
+usarmos uma interrogação, usamos um nome qualquer para o parâmetro precedido de
+dois pontos:
+    String jpql = "SELECT obj FROM Classe obj WHERE obj.nome = :meuParm";
+        ou 
+    String jpql = "SELECT obj FROM Classe obj WHERE obj.nome = ?1";
+
+Para obter o ResultList filtrado com essa JPQL, use:
+    TypedQuery<Classe> q = em.createQuery(jpql, Classe.class);
+    
+    q.setParameter("meuParm", nome); // Se o parâmetro for nomeado ou...
+    q.setParameter(1, nome); // ...se o parâmetro for identificado por número.
+    
+    q.getResultList();
+
+Para buscar dados de tabelas relacionadas, basta usar o acesso aos objetos 
+referenciados pela classe consultada:
+
+    String jpql = "SELECT p FROM Produto p WHERE p.categoria.nome = :nome";
+
+Repare que o filtro é feito na Strign nome no objeto categoria que está dentro
+do objeto p. É uma consulta sem uso de joins do SQL normal!
