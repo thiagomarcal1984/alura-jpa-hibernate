@@ -67,3 +67,18 @@ Passos para persistir dados usando Hibernate:
 
     6)  Libere os recursos:
             em.close();
+
+LocalDate e LocalDateTime são classes novas do Java que podem ser usadas nas 
+classes Entity. 
+
+Tipos enumerados no Hibernate são salvos no banco de dados pelo número de 
+ordem dos tipos enumerados, começando por 1. Exemplo:
+    public enum Categoria {
+        CELULARES, // 1 
+        INFORMATICA, // 2
+        LIVROS; // 3
+    }
+
+Para que o JPA não confunda os tipos caso a ordem deles seja modificada, anote
+na propriedade do tipo enumerado com @Enumerated(EnumType.STRING). Desta forma,
+o tipo enumerado será salvo como String, não como inteiro.
