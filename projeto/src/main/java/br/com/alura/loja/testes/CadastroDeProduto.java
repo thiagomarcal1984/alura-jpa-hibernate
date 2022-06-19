@@ -24,5 +24,8 @@ public class CadastroDeProduto {
 		celulares.setNome("1234"); // Segunda alteração na entidade na mesma transação.
 		
 		em.flush();
+		
+		em.remove(celulares);
+		em.flush();
 	}
 }

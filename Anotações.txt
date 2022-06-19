@@ -114,6 +114,10 @@ Métodos do EntityManager:
         Porém, não é o objeto passado no parâmetro que se torna gerenciado, mas
         sim uma nova instancia da entidade com os mesmos valores da entidade 
         Detached.
+    *   remove(objeto): muda o estado da instância para Removed e depois 
+        a remove do EntityManager e do database.
+    *   find(Classe, id): recupera pela classe e pelo id uma entidade managed.
+    *   createQuery(jpqlString): retorna uma Query a partir de um JPQL.
 
 Ao desenvolver entidades, elas precisam todas ter um construtor sem parâmetros.
 Do contrário, o método merge pode falhar porque não tem esse construtor padrão.
