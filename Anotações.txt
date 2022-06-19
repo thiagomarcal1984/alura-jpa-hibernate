@@ -121,3 +121,9 @@ Métodos do EntityManager:
 
 Ao desenvolver entidades, elas precisam todas ter um construtor sem parâmetros.
 Do contrário, o método merge pode falhar porque não tem esse construtor padrão.
+
+Na Java Persistence Query Language (JPQL), a sintaxe de um select seria:
+    "SELECT objeto FROM ClasseDaEntidade AS objeto";
+
+A ResultList desta JPQL é obtida a partir do método getResultList(), que é
+acessível a partir de uma query gerada pelo EntityManager (em.createQuery(q)).
