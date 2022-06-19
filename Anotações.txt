@@ -82,3 +82,10 @@ ordem dos tipos enumerados, começando por 1. Exemplo:
 Para que o JPA não confunda os tipos caso a ordem deles seja modificada, anote
 na propriedade do tipo enumerado com @Enumerated(EnumType.STRING). Desta forma,
 o tipo enumerado será salvo como String, não como inteiro.
+
+
+A entidade-pai deve conter tantas anotações @ManyToOne quantas forem as colunas
+que forem chave estrangeira para as entidades-filhas.
+
+O JPA NUNCA assume qual a cardinalidade que vai existir entre as propriedades
+dos objetos Entity.
