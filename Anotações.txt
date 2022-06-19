@@ -4,3 +4,14 @@ com o banco de dados.
 Dependências para o projeto no Maven:
     org.hibernate hibernate-entitymanager 5.4.27.Final
     com.h2database h2 1.4.200
+
+Link sobre a estrutura do JPA: https://tomee.apache.org/jpa-concepts.html 
+
+O arquivo persistence.xml precisa conter algumas propriedades para que a 
+implementação do JPA se comunique com o banco. Algumas propriedades na 
+persistence-unit (javax.persistence.jdbc):
+    * driver;
+    * url;
+    * username;
+    * password.
+

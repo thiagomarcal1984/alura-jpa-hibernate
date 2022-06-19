@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persitence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+	<!-- 
+		Cada persistence-unit equivale a um banco de dados.
+		As propriedades são:
+			* name: nome pra Persistence-Unit/DB. Geralmente é o nome do 
+				projeto, mas pode ser o nome do banco de dados etc.;
+			* transaction-type: Define quem cria o EntityManager. Há 2 tipos:
+				1) JTA: o servidor de aplicação cria o EntityManager;
+				2) RESOURCE_LOCAL: o desenvolvedor cria o EntityManager.
+	-->
+	<persistence-unit name="loja" transaction-type="JTA">
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver">
+				<!-- Classe do Driver JDBC usada na persistence-unit. -->
+			</property>
+			<property name="javax.persistence.jdbc.url" value="h2:mem:loja">
+				<!-- 
+					URL usada pelo Driver JDBC. Neste caso, h2 é o protocolo, 
+					mem é host do database (a memória, no caso) e loja é o 
+					banco de dados em si.
+				-->
+			</property>
+			<property name="javax.persistence.jdbc.username" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect">
+				<!-- Explica pro Hibernate qual a melhor forma de usar o SQL. -->
+			</property>
+		</properties>
+	</persistence-unit>
+</persistence>
