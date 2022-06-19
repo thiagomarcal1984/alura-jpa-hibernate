@@ -12,6 +12,28 @@ implementação do JPA se comunique com o banco. Algumas propriedades na
 persistence-unit (javax.persistence.jdbc):
     * driver;
     * url;
-    * username;
+    * user;
     * password.
 
+Algumas propriedades específicas do JPA dentro da tag persistence-unit:
+    * dialect;
+
+Anotações do JPA dentro das classes de modelo:
+    * Entity: informa que a classe deve ser gerenciada pela EntityManager.
+    * Table: altera as propriedades da tabela no database.
+    * Column: altera as propriedades da coluna da tabela.
+    * Id: indica qual propriedade corresponde à primary key da tabela.
+    * GeneratedValue: indica como uma coluna ID é gerada:
+        1) IDENTITY: a partir da coluna de ID.
+        2) SEQUENCE: a partir de uma sequência da tabela do database.
+        3) TABLE: a partir de uma tabela do database.
+        1) AUTO: geração automática
+
+O Hibernate consegue localizar as classes Entity no projeto automaticamente.
+MAS outras implementações do JPA podem não fazer o mesmo. Por isso, é 
+necessário incluir as classes no arquivo persistence.xml (tags class dentro 
+da tag persistence-unit).
+
+Cuidado: usando Hibernate, ou você declara todas as classes Entity ou não 
+declara nenhuma. Do contrário, o Hibernate só encontra as classes declaradas
+dentor do persistence.xml.

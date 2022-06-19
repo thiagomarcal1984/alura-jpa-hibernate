@@ -14,18 +14,19 @@
 				2) RESOURCE_LOCAL: o desenvolvedor cria o EntityManager.
 	-->
 	<persistence-unit name="loja" transaction-type="JTA">
+		<class>br.com.alura.modelo.Produto</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver">
 				<!-- Classe do Driver JDBC usada na persistence-unit. -->
 			</property>
-			<property name="javax.persistence.jdbc.url" value="h2:mem:loja">
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja">
 				<!-- 
 					URL usada pelo Driver JDBC. Neste caso, h2 é o protocolo, 
 					mem é host do database (a memória, no caso) e loja é o 
 					banco de dados em si.
 				-->
 			</property>
-			<property name="javax.persistence.jdbc.username" value="sa" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect">
